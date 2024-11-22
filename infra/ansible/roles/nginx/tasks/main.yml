@@ -1,0 +1,17 @@
+---
+- name: Copy over config file
+  copy:
+    src: personal-website.conf
+    dest: /etc/nginx/conf.d/
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  become: yes
+
+- name: Create directory for static content
+  file:
+    path: /var/www/personal-website/
+    state: directory
+    mode: 0755
+

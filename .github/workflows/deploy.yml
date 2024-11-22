@@ -1,0 +1,29 @@
+# Use this later:
+# https://github.com/marketplace/actions/jekyll-action
+name: Deploy HTML/CSS files to the webserver
+
+on:
+  push:
+    branches: main
+    paths:
+      - _site/**
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Copy files to the webserver over SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          source: _site/
+          target: /var/www/personal-website/
+

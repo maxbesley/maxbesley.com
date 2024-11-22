@@ -1,0 +1,9 @@
+---
+- name: Configure a web server
+  hosts: webservers
+
+  roles:
+    - packages
+    - { role: ufw, become: true }
+    - nginx
+
