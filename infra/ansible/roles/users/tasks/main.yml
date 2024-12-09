@@ -1,0 +1,25 @@
+---
+- name: Ensure "docker" group exists with correct gid
+  group:
+    name: docker
+    state: present
+    gid: 1750
+
+- name: Ensure group for non-root user exists
+  group:
+    name: "{{ remote_linux_user }}"
+    state: present
+
+- name: Create and configure non-root user
+  user:
+    name:  "{{ remote_linux_user }}"
+    group: "{{ remote_linux_user }}"
+    groups: root,sudo,docker
+    shell: /bin/bash
+
+- name: Place public ssh key in user's ~/.ssh directory
+  ansible.posix.authorized_key:
+    user: "{{ remote_linux_user }}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/website.pub') }}"  # TODO: put ssh key filename in some kind of variable
+
