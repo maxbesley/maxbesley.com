@@ -1,0 +1,7 @@
+---
+- name: Copy over fail2ban configuration
+  copy:
+    src: jail.local
+    dest: /etc/fail2ban/jail.local
+  become: yes
+

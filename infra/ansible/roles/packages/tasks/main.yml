@@ -10,6 +10,7 @@
         pkg:
           - build-essential
           - ufw
+          - fail2ban
           - htop
           - certbot
         state: latest
