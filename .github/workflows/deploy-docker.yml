@@ -1,0 +1,59 @@
+name: Deploy nginx Docker image
+
+on:
+  push:
+    branches: main
+    paths:
+      - infra/nginx/**
+      - Dockerfile
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build-and-push:
+    name: Publish image to ${{ env.REGISTRY }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to ${{ env.REGISTRY }}
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ github.actor }}/webserver:latest
+
+  deploy-image:
+    needs: build-and-push
+    name: Deploy image to web server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Docker image
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            docker pull ghcr.io/maxbesley/webserver:latest
+            docker stop server
+            docker run --detach --rm --name server -it -p 443:443 -p 80:80 -v /var/www/personal-website/_site/:/var/www/personal-website/ -v /etc/letsencrypt/:/etc/letsencrypt/ ghcr.io/maxbesley/webserver:latest
+
