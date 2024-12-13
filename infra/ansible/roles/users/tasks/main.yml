@@ -21,5 +21,5 @@
   ansible.posix.authorized_key:
     user: "{{ remote_linux_user }}"
     state: present
-    key: "{{ lookup('file', '~/.ssh/website.pub') }}"  # TODO: put ssh key filename in some kind of variable
+    key: "{{ lookup('file', '~/.ssh/{{ ssh_key_filename }}') }}"
 
