@@ -16,6 +16,7 @@
     group: "{{ remote_linux_user }}"
     groups: root,sudo,docker
     shell: /bin/bash
+    password: "{{ user_password | password_hash('sha512') }}"
 
 - name: Place public ssh key in user's ~/.ssh directory
   ansible.posix.authorized_key:

@@ -2,8 +2,14 @@
 - name: Configure a web server
   hosts: webservers
 
+  vars_files:
+    - group_vars/vault.yml
+
   roles:
     - packages
+    - { role: users, become: true }
     - { role: ufw, become: true }
+    - { role: ssh, become: true }
+    - fail2ban
     - nginx
 

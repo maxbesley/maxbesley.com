@@ -1,0 +1,24 @@
+---
+- name: Set SSH loglevel to verbose
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#LogLevel'
+    line: LogLevel VERBOSE
+
+- name: Disable SSH root login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: PermitRootLogin no
+
+- name: Disable SSH password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#PasswordAuthentication'
+    line: PasswordAuthentication no
+
+- name: Set the SSH "AuthenticationMethods" option
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: AuthenticationMethods publickey
+
