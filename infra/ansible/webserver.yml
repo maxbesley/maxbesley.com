@@ -7,9 +7,10 @@
 
   roles:
     - packages
-    - { role: users, become: true }
-    - { role: ufw, become: true }
-    - { role: ssh, become: true }
+    - { role: sysctl, become: true }
+    - { role: ufw,    become: true }
+    - { role: users,  become: true }
+    - { role: ssh,    become: true }
     - fail2ban
     - nginx
 

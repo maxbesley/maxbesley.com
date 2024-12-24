@@ -1,0 +1,21 @@
+---
+- name: Set OS "swappiness" parameter
+  ansible.posix.sysctl:
+    name: vm.swappiness
+    value: 10
+
+- name: Set laptop mode (e.g. for power saving)
+  ansible.posix.sysctl:
+    name: vm.laptop_mode
+    value: 0
+
+- name: Configure to always drop ICMP packets
+  ansible.posix.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  loop:
+    - name: net.ipv4.icmp_echo_ignore_all
+      value: 1
+    - name: net.ipv4.icmp_echo_ignore_broadcasts
+      value: 1
+
