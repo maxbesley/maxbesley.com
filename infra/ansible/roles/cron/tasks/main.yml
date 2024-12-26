@@ -1,0 +1,16 @@
+---
+- name: Ensure a test cron job exists
+  cron:
+    name: For testing if cron is working
+    user: root
+    job: /usr/bin/uptime > /tmp/uptime-test
+
+- name: Create a cron job for certificate renewal
+  cron:
+    name: Run the certificate renewal check weekly
+    user: root
+    minute: 0
+    hour: 4
+    weekday: 1
+    job: certbot renew --quiet
+
