@@ -55,5 +55,5 @@ jobs:
           script: |
             docker pull ghcr.io/maxbesley/webserver:latest
             docker stop server
-            docker run --detach --rm --name server -it -p 443:443 -p 80:80 -v /var/www/personal-website/_site/:/var/www/personal-website/ -v /etc/letsencrypt/:/etc/letsencrypt/ ghcr.io/maxbesley/webserver:latest
+            docker run --detach --rm --name server -it -p 443:443 -v /var/www/personal-website/_site/:/var/www/personal-website/ -v /etc/letsencrypt/:/etc/letsencrypt/ ghcr.io/maxbesley/webserver:latest
 
