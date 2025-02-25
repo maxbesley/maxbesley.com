@@ -1,21 +1,28 @@
-# Use this later:
-# https://github.com/marketplace/actions/jekyll-action
 name: Deploy HTML/CSS files to the webserver
 
 on:
   push:
     branches: main
     paths:
-      - _site/**
+      - src/**
   workflow_dispatch:
 
 jobs:
   deploy:
+    name: deploy
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Clone the repository
         uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Build the site
+        run: deno task build
 
       - name: Copy files to the webserver over SSH
         uses: appleboy/scp-action@v0.1.7
