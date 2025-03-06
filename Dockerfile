@@ -6,5 +6,5 @@ LABEL author="Max Besley" \
 
 COPY ./infra/nginx/personal-website.conf /etc/nginx/conf.d/
 
-EXPOSE 443 80
+EXPOSE 443
 
