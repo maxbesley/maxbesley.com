@@ -40,9 +40,9 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.actor }}/webserver:latest
 
   deploy-image:
-    needs: build-and-push
     name: Deploy image to web server
     runs-on: ubuntu-latest
+    needs: build-and-push
 
     steps:
       - name: Deploy Docker image
@@ -55,5 +55,6 @@ jobs:
           script: |
             docker pull ghcr.io/maxbesley/webserver:latest
             docker stop server
+            docker container prune --force
             docker run --detach --rm --name server -it -p 443:443 -v /var/www/personal-website/_site/:/var/www/personal-website/ -v /etc/letsencrypt/:/etc/letsencrypt/ ghcr.io/maxbesley/webserver:latest
 
