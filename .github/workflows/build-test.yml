@@ -1,0 +1,25 @@
+name: Test if the website builds
+
+on:
+  pull_request:
+    paths:
+      - src/**
+      - _config.ts
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone the repository
+        uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Build the website
+        run: deno task build
+

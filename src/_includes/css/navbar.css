@@ -1,0 +1,45 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  height: 80px;
+
+  .navbar-left {
+    font-size: 22px;
+    font-weight: 800;
+
+    & a {
+      color: var(--text-color);
+    }
+  }
+
+  .navbar-right {
+    font-size: 16px;
+    font-weight: 600;
+
+    & a {
+      display: inline-block;
+      color: var(--text-color);
+      margin: 0 10px;
+
+      & span {
+        margin-left: 5px;
+      }
+    }
+
+    & img {
+      float: left;
+      width: 20px;
+      height: 20px;
+    }
+
+    #email-link {
+      color: var(--background-color);
+      background-color: var(--text-color);
+      padding: 5px 15px;
+      border-radius: 5px;
+    }
+  }
+}
+

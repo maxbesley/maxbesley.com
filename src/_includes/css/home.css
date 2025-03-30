@@ -1,0 +1,32 @@
+.home-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  margin: 50px 0;
+  margin-bottom: 100px;
+  gap: 60px;
+
+  & .home-content {
+    flex: 5;
+
+    & h1 {
+      font-size: 35px;
+    }
+    & h2 {
+      font-size: 25px;
+    }
+  }
+
+  & .home-headshot {
+    display: flex;
+    justify-content: right;
+    flex: 2;
+
+    & img {
+      width: 450px;
+      border-radius: 10%;
+    }
+  }
+}
+

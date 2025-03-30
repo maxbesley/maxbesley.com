@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <meta charset='UTF-8' />
-    <title>{{ title + ' | ' + site.author.name }}</title>
+    <meta charset='UTF-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <link rel='canonical' href='{{ url |> url(true) }}'>
+    <link rel='stylesheet' type='text/css' href='/styles.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==' crossorigin='anonymous' referrerpolicy='no-referrer'>
+    <title>{{ site.author.name + ' | ' + title }}</title>
   </head>
   <body>
-    {{ content }}
+  {{ include 'templates/navbar.vto' }}
+  <main>
+    <section class='home-section'>
+      <div class='home-content'>
+        {{ content }}
+      </div>
+      <div class='home-headshot'>
+        <img src='/img/profile.jpg' alt='Headshot'>
+      </div>
+    </section>
+  </main>
   </body>
 </html>
 
