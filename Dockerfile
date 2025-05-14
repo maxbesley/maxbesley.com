@@ -1,10 +1,9 @@
-FROM nginx:1.27-alpine-slim
+FROM caddy:2.10-alpine
 
 LABEL author="Max Besley" \
       maintainer="besleymax@gmail.com" \
-      description="For containerizing my nginx server"
+      description="For containerizing my Caddy server"
 
-COPY ./infra/nginx/personal-website.conf /etc/nginx/conf.d/
+COPY ./infra/caddy/Caddyfile /etc/caddy/
 
-EXPOSE 443
-
+EXPOSE 443 80
