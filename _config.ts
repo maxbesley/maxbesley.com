@@ -10,16 +10,6 @@ const site = lume({
     location: new URL('https://maxbesley.com'),
 });
 
-// Download the profile picture over the Internet
-try {
-  const resp = await fetch('https://raw.githubusercontent.com/jigsawpieces/dog-api-images/refs/heads/main/kuvasz/n02104029_1781.jpg');
-  const file = await Deno.open('./src/img/profile.jpg', { write: true, create: true });
-  await resp.body.pipeTo(file.writable);
-} catch (err) {
-  const errMsg = 'Error downloading image';
-  throw new Error(errMsg, err);
-}
-
 site
   .use(icons())
   .use(postcss({
