@@ -11,17 +11,14 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: webserver
-  TAG: latest
+
+permissions:
+  packages: write
 
 jobs:
   build-and-push:
     name: Publish image to ghcr.io
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
 
     steps:
       - name: Checkout repository
@@ -49,7 +46,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ env.SHA }}
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy-image:
