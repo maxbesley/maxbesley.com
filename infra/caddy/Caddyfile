@@ -1,5 +1,10 @@
-maxbesley.com
+maxbesley.com {
+  encode
+  file_server
+  root /srv
+  tls /etc/ssl/certs/certificate.pem /etc/ssl/private/key.pem  # Cloudflare Origin CA certificate
+}
 
-encode
-file_server
-root /srv
+www.maxbesley.com {
+  redir https://maxbesley.com{uri}
+}
