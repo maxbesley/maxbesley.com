@@ -43,3 +43,24 @@ nav {
   }
 }
 
+@media (width <= 600px) {
+  nav {
+    padding: 0 20px;
+
+    .navbar-right a img {
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+    }
+
+    .navbar-right #email-link {
+      color: var(--text-color);
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .navbar-right a span {
+      display: none;
+    }
+  }
+}

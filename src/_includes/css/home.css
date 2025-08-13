@@ -3,8 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
-  margin: 50px 0;
-  margin-bottom: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   gap: 60px;
 
   & .home-content {
@@ -29,4 +29,3 @@
     }
   }
 }
-
