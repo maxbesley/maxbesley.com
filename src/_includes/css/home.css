@@ -24,8 +24,38 @@
     flex: 2;
 
     & img {
-      width: 450px;
+      width: 430px;
       border-radius: 10%;
     }
+  }
+}
+
+@media (width <= 850px) {
+  .home-content {
+    font-size: 14px;
+
+  }
+
+  .home-section {
+    .home-headshot img {
+      width: 350px;
+    }
+  }
+}
+
+@media (width <= 740px) {
+  .home-section {
+    flex-direction: column-reverse;
+    gap: 30px;
+
+    .home-headshot img {
+      width: 300px;
+    }
+  }
+}
+
+@media (width <= 600px) {
+  .home-section {
+    padding: 0 20px;
   }
 }
